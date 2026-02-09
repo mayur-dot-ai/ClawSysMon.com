@@ -363,7 +363,7 @@ The Pro version adds GTD-based project management:
 - **Full agent CRUD** with persona templates
 - **Multi-agent workflows** — chain agents together for complex tasks
 
-Contact: [pro@clawsysmon.com](mailto:pro@clawsysmon.com)
+Contact: [x.com/mayuronx](https://x.com/mayuronx) (DM for Pro inquiries)
 
 ---
 
