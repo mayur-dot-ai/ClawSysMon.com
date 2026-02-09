@@ -31,7 +31,7 @@ GTD-based project management and AI-assisted task organization.
 |---------|-------------|
 | **Unified Inbox** | Top-of-funnel capture zone for tasks and ideas |
 | **AI Auto-Triage** | Automatic task categorization into projects |
-| **Project Kanban** | Drag-and-drop boards per project |
+| **Project Kanban** | Drag-and-drop tasks per project — prioritize within columns and move across columns (Backlog → Blocker → To Do → Doing → Done) |
 | **Project Chat** | Natural language task management on boards |
 | **Advanced Search** | Cross-project search with AI-powered recommendations |
 | **Skill Builder** | Full CRUD (Create, Read, Update, Delete) for creating and editing skills |
@@ -283,7 +283,7 @@ The Pro version adds GTD-based project management:
 
 - **Unified Inbox** for task capture
 - **AI Auto-Triage** into projects
-- **Kanban boards** per project
+- **Kanban boards** — drag tasks within columns (prioritize) and across columns (change status)
 - **Natural language** task commands
 - **Full skill CRUD** with templates
 - **Full agent CRUD** with persona templates
