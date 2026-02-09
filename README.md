@@ -205,7 +205,7 @@ chmod +x install.sh
 - Which features to enable? (process monitor, file watcher, etc.)
 - **Standalone port or reverse proxy?**
   - Standalone: Pick a port (default: 3000)
-  - Reverse proxy: Configure Caddy/Nginx to route `/clawsysmon` → ClawSysMon, `/` → OpenClaw
+  - Reverse proxy: Configure Caddy/Nginx to route `/clawsysmon.com` → ClawSysMon, `/` → OpenClaw
 - Path to your OpenClaw config? (auto-detected or manual)
 
 Everything is configurable. No surprises.
@@ -224,16 +224,16 @@ Caddy example:
     # OpenClaw Gateway at root
     reverse_proxy localhost:18788
     
-    # ClawSysMon at /clawsysmon (case insensitive)
-    reverse_proxy /clawsysmon* localhost:3000 {
-        uri strip_prefix /clawsysmon
+    # ClawSysMon at /clawsysmon.com (case insensitive)
+    reverse_proxy /clawsysmon.com* localhost:3000 {
+        uri strip_prefix /clawsysmon.com
     }
 }
 ```
 
 Access:
 - `localhost:18789/` → OpenClaw dashboard
-- `localhost:18789/clawsysmon` → ClawSysMon
+- `localhost:18789/clawsysmon.com` → ClawSysMon
 
 ### Data Persistence
 
