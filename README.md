@@ -243,9 +243,9 @@ Access:
 
 **On disk:**
 ```
-~/.clawsysmon_x7k2p9/           # Randomized install directory
+~/.clawsysmon/                  # Install directory
 ├── .env                        # DB filename, port, feature flags
-├── clawsysmon_a7x9k2p9.db      # Everything lives here (SQLite)
+├── clawsysmon_a7x9k2p9.db      # Randomized DB name — everything lives here
 ├── index.html                  # SPA entry
 ├── assets/                     # Built JS/CSS
 └── logs/                       # Optional file logging
