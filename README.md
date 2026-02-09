@@ -347,7 +347,7 @@ npm start
 - [ ] Schema documentation inline
 
 ### v2.0 - Security & Enterprise
-- [ ] Full E2EE database encryption (SQLite with SQLCipher)
+- [ ] Full E2EE database encryption (SQLite with SQLCipher) — user configures encryption key and unlocks database each browser session
 
 ---
 
