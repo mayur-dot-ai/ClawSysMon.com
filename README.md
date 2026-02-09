@@ -164,18 +164,28 @@ Since the Model Testing Lab needs API keys that shouldn't touch the main OpenCla
 
 ### Installation
 
-One-command setup:
+**Interactive Setup** (Recommended)
+
+SSH into your OpenClaw server and run the installer. It will guide you through configuration interactively — no command-line flags needed.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/mayur-dot-ai/ClawSysMon.com/main/install.sh | bash
+# 1. Download the installer
+curl -fsSL -o install.sh https://raw.githubusercontent.com/mayur-dot-ai/ClawSysMon.com/main/install.sh
+
+# 2. Make it executable
+chmod +x install.sh
+
+# 3. Run interactively — answer the prompts
+./install.sh
 ```
 
-The script will:
-1. Clone repo to `~/.clawsysmon/`
-2. Initialize SQLite database
-3. Set up local auth credentials
-4. Build production assets
-5. Output local URL: `http://localhost:3000`
+**The installer will ask:**
+- Where to install? (default: `~/.clawsysmon/`)
+- Which features to enable? (process monitor, file watcher, etc.)
+- Which port to use? (default: 3000)
+- Path to your OpenClaw config? (auto-detected or manual)
+
+Everything is configurable. No surprises.
 
 ### Network Configuration
 
