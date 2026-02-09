@@ -363,7 +363,7 @@ The Pro version adds GTD-based project management:
 - **Full agent CRUD** with persona templates
 - **Multi-agent workflows** — chain agents together for complex tasks
 
-Contact: [x.com/mayuronx](https://x.com/mayuronx) (DM for Pro inquiries)
+Contact: <a href="https://x.com/mayuronx" target="_blank" rel="noopener noreferrer">x.com/mayuronx</a> (DM for Pro inquiries)
 
 ---
 
