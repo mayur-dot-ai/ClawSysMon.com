@@ -18,6 +18,7 @@ Real-time monitoring, configuration management, and safe experimentation tools f
 | **Event Stream** | Live log of file changes, agent actions, config updates |
 | **File Watcher** | inotify-based monitoring of `/memory`, `/workspace`, configs |
 | **Config Editor** | Edit `config.json`, `soul.md`, agent memory files with validation |
+| **Agent Browser** | Built-in browser automation for web tasks, testing, and data extraction |
 | **Model Testing Lab** | Test providers/models in isolation before applying to OpenClaw |
 | **Dual Search** | Vector search + native file search across all workspace files |
 | **Skill Browser** | Read-only view of installed skills with documentation |
@@ -87,6 +88,33 @@ Analyzes which files changed to determine if reboot needed:
 - "Test Config" button validates without applying
 - Rollback to last known good config on failed reboot
 
+### Agent Browser
+Built-in browser automation using [agent-browser](https://github.com/vercel-labs/agent-browser) (Vercel Labs) — a fast Rust-based CLI with AI-friendly ref-based element selection.
+
+**Key Capabilities:**
+- **Ref-based Automation:** Snapshot pages to get element refs (@e1, @e2), then interact without brittle CSS selectors
+- **Headless or Headed:** Run invisible or watch the browser work
+- **Multi-session:** Isolate cookies/storage per task with session profiles
+- **Web Testing:** Fill forms, click buttons, extract data, take screenshots
+- **Mobile Testing:** iOS Simulator support for mobile web testing
+
+**Example Workflow:**
+```bash
+# 1. Navigate and snapshot
+agent-browser open example.com
+agent-browser snapshot -i
+
+# 2. Use refs to interact
+agent-browser click @e2
+agent-browser fill @e3 "search query"
+
+# 3. Extract data
+agent-browser get text @e1
+agent-browser screenshot capture.png
+```
+
+Perfect for automating web tasks, testing integrations, or scraping data without leaving the dashboard.
+
 ### Model Testing Lab
 - ChatGPT-style interface isolated from main OpenClaw config
 - Test any provider/model (OpenAI, Anthropic, Ollama, etc.)
@@ -122,6 +150,7 @@ Analyzes which files changed to determine if reboot needed:
 | Frontend | React + Tailwind CSS |
 | Database | SQLite (local file) |
 | Process Mgmt | pm2-interface or child_process |
+| Browser Automation | agent-browser (Rust + Playwright) |
 
 ### Installation
 
@@ -219,6 +248,7 @@ npm start
 - [ ] Real-time event stream
 - [ ] File watcher with attribution
 - [ ] Config editor with JSON validation
+- [ ] Agent Browser integration
 - [ ] Model testing lab
 - [ ] Dual-layer search
 - [ ] Skill browser (read-only)
