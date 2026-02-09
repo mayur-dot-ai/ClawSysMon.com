@@ -1,4 +1,4 @@
-# ClawSysMon - OpenClaw Meta-Dashboard
+# ClawSysMon - An OpenClaw System Monitor
 
 > A standalone management cockpit for OpenClaw. Monitor, configure, and extend your personal AI assistant with confidence.
 
