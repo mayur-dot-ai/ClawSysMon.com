@@ -34,7 +34,7 @@ GTD-based project management and AI-assisted task organization.
 | **Project Kanban** | Drag-and-drop boards per project |
 | **Project Chat** | Natural language task management on boards |
 | **Advanced Search** | Cross-project search with AI-powered recommendations |
-| **Skill Builder** | Full CRUD for creating and editing skills |
+| **Skill Builder** | Full CRUD (Create, Read, Update, Delete) for creating and editing skills |
 
 ---
 
