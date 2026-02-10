@@ -1,65 +1,41 @@
-# ClawSysMon
+# ClawSysMon Core
 
-> OpenClaw System Monitor - Core process watcher + Pro Kanban project management
+> OpenClaw System Monitor - Process watcher and status dashboard
 
-## Structure
+A minimal, standalone dashboard to monitor your OpenClaw instance. Runs independently so if OpenClaw crashes, you can still see status and restart it.
 
-This repo contains two packages:
+## Features
 
-### `/core` - Process Monitor
-Minimal OpenClaw status dashboard:
-- Shows Online/Offline status with pulsing indicator
-- Displays OpenClaw PID
-- "Revive" button to restart OpenClaw gateway
-- Auto-refreshes every 5 seconds
+- **Process Monitor** - Watch OpenClaw PID, show Online/Offline status
+- **Revive Button** - Restart OpenClaw gateway with one click
+- **Auto-refresh** - Checks status every 5 seconds
+- **Survives crashes** - Runs on separate port (3001), independent of OpenClaw
 
-**To run:**
+## Quick Start
+
 ```bash
-cd core
 npm install
 npm start
 # Open http://localhost:3001
 ```
 
-### `/pro` - Kanban Project Management  
-Full-featured project management backend:
-- Projects (create, list, get)
-- Cards/Kanban items (CRUD, status: todo/in-progress/done)
-- Comments on cards
-- SQL runner for direct queries
-- SQLite database with better-sqlite3
+## Screenshot
 
-**To run:**
-```bash
-cd pro
-npm install
-npm start
-# Open http://localhost:3002
-```
+Simple status card showing:
+- 🟢 Online / 🔴 Offline indicator (with pulse animation)
+- OpenClaw PID when running
+- "Revive OpenClaw" button when offline
+- Last check timestamp
 
-**API Endpoints:**
-- `GET/POST /api/projects` - List/create projects
-- `GET /api/projects/:id` - Get project
-- `GET /api/projects/:id/cards` - Get project cards
-- `POST /api/projects/:id/cards` - Create card
-- `PATCH /api/cards/:id` - Update card (status, title, body)
-- `DELETE /api/cards/:id` - Delete card
-- `POST /api/cards/:id/comments` - Add comment
-- `POST /api/sql` - Run SQL queries
+## API
+
+- `GET /api/status` - Returns `{online: true/false, pid: 12345}`
+- `POST /api/revive` - Restarts OpenClaw gateway
 
 ## Status
 
-- ✅ Core: Complete (minimal but functional)
-- ✅ Pro Backend: Complete (full Kanban API)
-- ❌ Pro Frontend: Not built (needs React/Vue Kanban UI)
-
-## Next Steps
-
-1. Build Pro frontend with drag-drop Kanban board
-2. Add unified inbox for task capture
-3. Add AI auto-triage for categorizing tasks
-4. Connect to OpenClaw for session management
+✅ **Complete and functional** - Ready to use
 
 ---
 
-*Built for OpenClaw. Monitors OpenClaw. Extends OpenClaw.*
+*Part of the ClawSysMon family. Built for OpenClaw.*
