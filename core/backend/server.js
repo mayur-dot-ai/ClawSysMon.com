@@ -12,4 +12,31 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 
 function getOpenClawStatus() {
   return new Promise((resolve) => {
-    exec(pgrep
+    exec('pgrep -f "openclaw" | head -1', (error, stdout) => {
+      if (error || !stdout.trim()) {
+        resolve({ online: false, pid: null });
+      } else {
+        resolve({ online: true, pid: stdout.trim() });
+      }
+    });
+  });
+}
+
+app.get("/api/status", async (req, res) => {
+  const status = await getOpenClawStatus();
+  res.json(status);
+});
+
+app.post("/api/revive", (req, res) => {
+  exec("openclaw gateway restart", (error) => {
+    if (error) {
+      res.status(500).json({ error: "Failed to restart", details: error.message });
+    } else {
+      res.json({ success: true, message: "OpenClaw restart initiated" });
+    }
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`ClawSysMon Core running on port ${PORT}`);
+});
