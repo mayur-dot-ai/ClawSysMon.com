@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ClawSysMon Core</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container { text-align: center; padding: 40px; }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .status-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 40px 60px;
+      margin: 30px 0;
+      border: 1px solid #333;
+    }
+    .status-indicator {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 12px;
+      animation: pulse 2s infinite;
+    }
+    .online { background: #00ff88; box-shadow: 0 0 20px #00ff88; }
+    .offline { background: #ff4444; box-shadow: 0 0 20px #ff4444; animation: none; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+    .status-text { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .pid { color: #888; margin-top: 10px; font-size: 0.9rem; }
+    .revive-btn {
+      background: linear-gradient(90deg, #7b2cbf, #00d4ff);
+      border: none;
+      color: white;
+      padding: 16px 48px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+    }
+    .revive-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4); }
+    .revive-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .last-check { color: #666; font-size: 0.85rem; margin-top: 30px; }
+    .error { color: #ff4444; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ClawSysMon Core</h1>
+    <div class="status-card">
+      <div class="status-text">
+        <span id="indicator" class="status-indicator offline"></span>
+        <span id="status">Checking...</span>
+      </div>
+      <div id="pid" class="pid"></div>
+      <button id="reviveBtn" class="revive-btn" style="display:none">Revive OpenClaw</button>
+      <div id="error" class="error"></div>
+    </div>
+    <div class="last-check">Last checked: <span id="lastCheck">-</span></div>
+  </div>
+
+  <script>
+    const API_URL = window.location.origin;
+    
+    async function checkStatus() {
+      try {
+        const res = await fetch(`${API_URL}/api/status`);
+        const data = await res.json();
+        updateUI(data);
+      } catch (err) {
+        updateUI({ online: false, pid: null, error: err.message });
+      }
+      document.getElementById('lastCheck').textContent = new Date().toLocaleTimeString();
+    }
+
+    function updateUI(data) {
+      const indicator = document.getElementById('indicator');
+      const status = document.getElementById('status');
+      const pid = document.getElementById('pid');
+      const reviveBtn = document.getElementById('reviveBtn');
+      const error = document.getElementById('error');
+      
+      if (data.online) {
+        indicator.className = 'status-indicator online';
+        status.textContent = 'OpenClaw Online';
+        pid.textContent = `PID: ${data.pid}`;
+        reviveBtn.style.display = 'none';
+        error.textContent = '';
+      } else {
+        indicator.className = 'status-indicator offline';
+        status.textContent = 'OpenClaw Offline';
+        pid.textContent = '';
+        reviveBtn.style.display = 'inline-block';
+        error.textContent = data.error || '';
+      }
+    }
+
+    document.getElementById('reviveBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('reviveBtn');
+      btn.disabled = true;
+      btn.textContent = 'Restarting...';
+      try {
+        await fetch(`${API_URL}/api/revive`, { method: 'POST' });
+        setTimeout(checkStatus, 2000);
+      } catch (err) {
+        document.getElementById('error').textContent = 'Revive failed: ' + err.message;
+      }
+      btn.disabled = false;
+      btn.textContent = 'Revive OpenClaw';
+    });
+
+    checkStatus();
+    setInterval(checkStatus, 5000);
+  </script>
+</body>
+</html>
